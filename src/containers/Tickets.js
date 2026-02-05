@@ -18,11 +18,16 @@ const Alert = styled.div`
   text-align: center;
 `;
 
-const Tickets = ({ loading, error, data }) => (
+const Tickets = ({ loading, error, data, onDragStart }) => (
   <TicketsWrapper>
     {(loading || error) && <Alert>{loading ? 'Loading...' : error}</Alert>}
     {data.map(ticket => (
-      <Ticket key={ticket.id} marginRight ticket={ticket} />
+      <Ticket 
+        key={ticket.id} 
+        marginRight 
+        ticket={ticket}
+        onDragStart={onDragStart}
+      />
     ))}
   </TicketsWrapper>
 );

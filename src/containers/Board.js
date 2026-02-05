@@ -102,11 +102,25 @@ const ButtonRow = styled.div`
   gap: 8px;
 `;
 
+const ArchiveSection = styled.div`
+  margin: 20px 5%;
+  padding: 20px;
+  background-color: #fff3cd;
+  border-radius: 8px;
+  border: 2px dashed #ffc107;
+`;
+
+const ArchiveTitle = styled.h3`
+  margin-top: 0;
+  color: #856404;
+`;
+
 class Board extends React.Component {
   constructor() {
     super();
     this.state = {
       tickets: [],
+      archivedTickets: [],
       newTitle: '',
       newBody: '',
       newId: '',
@@ -133,7 +147,26 @@ class Board extends React.Component {
 
   onDrop = (e, laneId) => {
     const id = e.dataTransfer.getData('id');
+    const fromArchive = e.dataTransfer.getData('fromArchive');
 
+    if (fromArchive === 'true') {
+    const ticketToRestore = this.state.archivedTickets.find(
+      ticket => ticket.id === parseInt(id)
+    );
+    
+    if (ticketToRestore) {
+      const archivedTickets = this.state.archivedTickets.filter(
+        ticket => ticket.id !== parseInt(id)
+      );
+      
+      const restoredTicket = { ...ticketToRestore, lane: laneId };
+      
+      this.setState({
+        tickets: [...this.state.tickets, restoredTicket],
+        archivedTickets
+      });
+    }
+  } else {
     const tickets = this.state.tickets.filter(ticket => {
       if (ticket.id === parseInt(id)) {
         ticket.lane = laneId;
@@ -145,7 +178,8 @@ class Board extends React.Component {
       ...this.state,
       tickets,
     });
-  };
+  }
+};
 
   handleToggleStatus = (ticketId) => {
     const tickets = this.state.tickets.map(ticket => 
@@ -157,9 +191,27 @@ class Board extends React.Component {
   };
 
   handleRemoveTask = (ticketId) => {
+    const ticketToArchive = this.state.tickets.find(ticket => ticket.id === ticketId);
     const tickets = this.state.tickets.filter(ticket => ticket.id !== ticketId);
-    this.setState({ tickets });
+    this.setState({ tickets,
+      archivedTickets: [...this.state.archivedTickets, ticketToArchive]
+    });
   };
+
+  handleRestoreTicket = (ticketId) => {
+  const ticketToRestore = this.state.archivedTickets.find(ticket => ticket.id === ticketId);
+  const archivedTickets = this.state.archivedTickets.filter(ticket => ticket.id !== ticketId);
+  
+  this.setState({
+    tickets: [...this.state.tickets, ticketToRestore],
+    archivedTickets
+  });
+};
+
+onArchiveDragStart = (e, id) => {
+  e.dataTransfer.setData('id', id);
+  e.dataTransfer.setData('fromArchive', 'true');
+};
 
   handleAddTask = () => {
   if (this.state.newTitle.trim() === '' || this.state.newBody.trim() === '') {
@@ -225,7 +277,7 @@ class Board extends React.Component {
     return (
       <>
         <AddTaskSection>
-  <FormTitle>{this.state.editingId ? 'Edit Task' : 'Add New Member'}</FormTitle>
+  <FormTitle>{this.state.editingId ? 'Edit Guy' : 'Add New Member'}</FormTitle>
   <InputGroup>
     <Input
       type="text"
@@ -283,11 +335,16 @@ class Board extends React.Component {
     />
   ))}
 </BoardWrapper>
-<Tickets 
-        data={this.state.tickets} 
-        loading={false} 
-        error="" 
-      />
+
+<ArchiveSection>
+  <ArchiveTitle>📦 Archived Tasks (Drag to restore)</ArchiveTitle>
+  <Tickets 
+    data={this.state.archivedTickets} 
+    loading={false} 
+    error=""
+    onDragStart={this.onArchiveDragStart}
+  />
+</ArchiveSection>
       </>
     );
   }
