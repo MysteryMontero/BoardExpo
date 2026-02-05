@@ -1,69 +1,67 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-const Card = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  max-width: 400px;
+const TicketWrapper = styled.div`
+  background: ${props => props.status === 'done' ? '#d4edda' : 'darkGray'};
+  padding: 20px;
+  border-radius: 20px;
+  border: ${props => props.status === 'done' ? '2px solid #28a745' : 'none'};
+
+  &:not(:last-child) {
+    margin-bottom: 5%;
+    margin-right: ${props => (!!props.marginRight ? '1%' : '0')};
+  }
 `;
 
 const Title = styled.h3`
-  margin: 0 0 12px 0;
-  color: #333;
-  text-decoration: ${props => props.completed ? 'line-through' : 'none'};
-  color: ${props => props.completed ? '#999' : '#333'};
+  width: 100%;
+  margin: 0px;
+  text-decoration: ${props => props.status === 'done' ? 'line-through' : 'none'};
 `;
 
-const Description = styled.p`
-  margin: 0 0 16px 0;
-  color: #666;
-  line-height: 1.5;
+const Body = styled.p`
+  width: 100%;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
 `;
 
 const Button = styled.button`
-  padding: 8px 16px;
-  background-color: ${props => props.completed ? '#6c757d' : '#007bff'};
+  padding: 6px 12px;
+  background-color: ${props => props.variant === 'complete' ? '#28a745' : '#dc3545'};
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
+  flex: 1;
   
   &:hover {
-    background-color: ${props => props.completed ? '#5a6268' : '#0056b3'};
+    opacity: 0.8;
   }
 `;
 
-const Status = styled.span`
-  display: block;
-  margin-top: 12px;
-  font-weight: bold;
-  color: ${props => props.completed ? '#28a745' : '#ffc107'};
-`;
-
-function TaskCard(props) {
-  const [isCompleted, setIsCompleted] = useState(false);
-
-  const handleToggleComplete = () => {
-    setIsCompleted(!isCompleted);
-  };
-
-  return (
-    <Card>
-      <Title completed={isCompleted}>{props.title}</Title>
-      <Description>{props.description}</Description>
-      <Button completed={isCompleted} onClick={handleToggleComplete}>
-        {isCompleted ? 'Mark Incomplete' : 'Mark Complete'}
+const TaskCard = ({ marginRight, onDragStart, ticket, onToggleStatus, onRemoveTask }) => (
+  <TicketWrapper
+    draggable
+    onDragStart={e => onDragStart && onDragStart(e, ticket.id)}
+    marginRight={marginRight}
+    status={ticket.status}
+  >
+    <Title status={ticket.status}>{ticket.title}</Title>
+    <Body>{ticket.body}</Body>
+    <ButtonGroup>
+      <Button variant="complete" onClick={() => onToggleStatus(ticket.id)}>
+        {ticket.status === 'done' ? 'Mark Incomplete' : 'Mark Complete'}
       </Button>
-      <Status completed={isCompleted}>
-        Status: {isCompleted ? 'Completed ✓' : 'Pending'}
-      </Status>
-    </Card>
-  );
-}
+      <Button variant="remove" onClick={() => onRemoveTask(ticket.id)}>
+        Remove
+      </Button>
+    </ButtonGroup>
+  </TicketWrapper>
+);
 
 export default TaskCard;

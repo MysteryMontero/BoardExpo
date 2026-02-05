@@ -23,14 +23,25 @@ const AppWrapper = styled.div`
 
 class App extends Component {
   render() {
+    const lanes = [
+      { id: 1, title: 'No Sign of Intellegence' },
+      { id: 2, title: 'Plain Stupid' },
+      { id: 3, title: 'Can Hold A Job At Least' },
+      { id: 4, title: 'Smart Cookie' },
+      { id: 5, title: 'Hyper Intelligent' },
+    ];
+
     return (
       <>
         <GlobalStyle />
         <AppWrapper>
           <Header />
-          <TaskCard 
-            title="Complete Assignment" 
-            description="Create a TaskCard component that displays a task title and description"
+          <Board
+            lanes={lanes}
+            dataSource={'../../assets/data.json'}
+          />
+          <Tickets
+            dataSource={'../../assets/data.json'}
           />
         </AppWrapper>
       </>

@@ -1,15 +1,15 @@
 [
   {
     "id": 1,
-    "title": "Billy",
-    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque egestas dictum libero, vel tristique odio pulvinar vitae.",
-    "lane": 1
+    "title": "Koby Bradley",
+    "body": "Real boy genius / Invented a new algebra / Could speak English at the of 3 months",
+    "lane": 5
   },
   {
     "id": 2,
-    "title": "Koby",
-    "body": "Hey that's me!",
-    "lane": 2
+    "title": "Jeremy Callinan",
+    "body": "IT professor at Pitt Bradford / uh...hasn't died yet, so he must be smart",
+    "lane": 3
   },
   {
     "id": 3,
@@ -33,7 +33,7 @@
     "id": 6,
     "title": "Johnny Bravo",
     "body": "In vel commodo ipsum. Duis id ipsum semper, condimentum ipsum sit amet, maximus massa.",
-    "lane": 4
+    "lane": 5
   },
   {
     "id": 7,
