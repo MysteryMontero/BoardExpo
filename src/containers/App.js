@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import Board from './Board';
 import Tickets from './Tickets';
 import Header from '../components/Header/Header';
-import TaskCard from './TaskCard';
+import TaskCard from '../components/TaskCard/TaskCard';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -24,9 +24,9 @@ const AppWrapper = styled.div`
 class App extends Component {
   render() {
     const lanes = [
-      { id: 1, title: 'No Sign of Intellegence' },
+      { id: 1, title: 'No Intellegence' },
       { id: 2, title: 'Plain Stupid' },
-      { id: 3, title: 'Can Hold A Job At Least' },
+      { id: 3, title: 'Can Hold A Job' },
       { id: 4, title: 'Smart Cookie' },
       { id: 5, title: 'Hyper Intelligent' },
     ];
@@ -38,9 +38,6 @@ class App extends Component {
           <Header />
           <Board
             lanes={lanes}
-            dataSource={'../../assets/data.json'}
-          />
-          <Tickets
             dataSource={'../../assets/data.json'}
           />
         </AppWrapper>

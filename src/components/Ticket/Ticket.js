@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TicketWrapper = styled.div`
-  background: darkGray;
+  background: blue;
   padding: 20px;
   border-radius: 20px;
 

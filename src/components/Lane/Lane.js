@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Ticket from '../Ticket/Ticket';
+import TaskCard from '../TaskCard/TaskCard';
 
 const LaneWrapper = styled.div`
   list-style: none;
@@ -39,6 +39,9 @@ const Lane = ({
   onDragStart,
   onDragOver,
   onDrop,
+  onToggleStatus,
+  onRemoveTask,
+  onEditTask,  // Add this
   title,
 }) => (
   <LaneWrapper
@@ -49,7 +52,14 @@ const Lane = ({
     {(loading || error) && <Alert>{loading ? 'Loading...' : error}</Alert>}
     <TicketsWrapper>
       {tickets.map(ticket => (
-        <Ticket key={ticket.id} onDragStart={onDragStart} ticket={ticket} />
+        <TaskCard 
+          key={ticket.id} 
+          onDragStart={onDragStart} 
+          ticket={ticket}
+          onToggleStatus={onToggleStatus}
+          onRemoveTask={onRemoveTask}
+          onEditTask={onEditTask}  // Add this
+        />
       ))}
     </TicketsWrapper>
   </LaneWrapper>

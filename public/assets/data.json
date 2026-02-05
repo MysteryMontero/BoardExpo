@@ -3,42 +3,49 @@
     "id": 1,
     "title": "Koby Bradley",
     "body": "Real boy genius / Invented a new algebra / Could speak English at the of 3 months",
-    "lane": 5
+    "lane": 5,
+    "status": "sexy"
   },
   {
     "id": 2,
     "title": "Jeremy Callinan",
     "body": "IT professor at Pitt Bradford / uh...hasn't died yet, so he must be smart",
-    "lane": 3
+    "lane": 3,
+    "status": "bald"
   },
   {
     "id": 3,
-    "title": "Wang",
-    "body": "Suspendisse ac lorem a neque tempus luctus non aliquam sapien. Cras ut lacus bibendum, placerat nibh eu, tempus neque.",
-    "lane": 3
+    "title": "Brent",
+    "body": "He was there when 9/11 happened.",
+    "lane": 1,
+    "status": "hungry"
   },
   {
     "id": 4,
-    "title": "Jordan",
-    "body": "Pellentesque pharetra fermentum sapien, aliquet ultrices ligula mattis porttitor.",
-    "lane": 3
+    "title": "Squidward",
+    "body": "Has no recognizable talent whatsoever.",
+    "lane": 2,
+    "status": "squid"
   },
   {
     "id": 5,
-    "title": "Jeremy",
-    "body": "Cras tellus ligula, mattis at facilisis eu, ultricies vel elit. Ut aliquam volutpat lacus, a rutrum sem vulputate non.",
-    "lane": 3
+    "title": "Ken Wang",
+    "body": "He's my boss so I gotta put him high.",
+    "lane": 5,
+    "status": "Fairy"
   },
   {
     "id": 6,
     "title": "Johnny Bravo",
-    "body": "In vel commodo ipsum. Duis id ipsum semper, condimentum ipsum sit amet, maximus massa.",
-    "lane": 5
+    "body": "Has very blonde and curly chest hair.",
+    "lane": 2,
+    "status": "pretty"
   },
   {
     "id": 7,
     "title": "Nick Fury",
-    "body": " Curabitur nec sem lorem. Donec venenatis, arcu vitae malesuada consequat, dolor ante placerat mi, in fermentum diam ipsum id libero.",
-    "lane": 4
+    "body": "Used to be white, look it up",
+    "lane": 4,
+    "status": "dead"
   }
 ]
